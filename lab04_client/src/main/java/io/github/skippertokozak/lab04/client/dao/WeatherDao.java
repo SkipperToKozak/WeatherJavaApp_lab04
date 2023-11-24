@@ -15,10 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class WeatherDao implements Dao<Measurement> {
     private String pathS = "./database/weather_data.txt";
@@ -95,6 +92,17 @@ public class WeatherDao implements Dao<Measurement> {
     @Override
     public Optional<Measurement> get(Integer id) {
         return Optional.ofNullable((localData.get(id)));
+    }
+    public List<Measurement> getWeatherList(Integer id){
+        List<Measurement> list = new ArrayList<>();
+        for (Measurement m : getAll()){
+            if (Objects.equals(m.getId_stacji(), id)){
+                list.add(m);
+            }
+        }
+        return list;
+
+
     }
     public void expand(String string){
 

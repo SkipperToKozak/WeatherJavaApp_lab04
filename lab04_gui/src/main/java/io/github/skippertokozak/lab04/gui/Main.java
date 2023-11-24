@@ -1,6 +1,6 @@
 package io.github.skippertokozak.lab04.gui;
 import io.github.skippertokozak.lab04.client.ClientRun;
-import io.github.skippertokozak.lab04.gui.window.Window;
+import io.github.skippertokozak.lab04.gui.window.WindowManager;
 
 
 public class Main {
@@ -8,8 +8,7 @@ public class Main {
 
         ClientRun clientRun = new ClientRun();
         clientRun.run();
-        Window window = new Window();
-        window.setVisible(true);
+        WindowManager windowManager = new WindowManager(clientRun);
 
 
         System.out.println("Hello world!");

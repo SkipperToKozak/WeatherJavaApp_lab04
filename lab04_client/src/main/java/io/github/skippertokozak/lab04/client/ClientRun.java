@@ -6,7 +6,7 @@ public class ClientRun {
     private WeatherDao weatherDao;
     public void run(){
 
-        WeatherDao weatherDao = new WeatherDao();
+            weatherDao = new WeatherDao();
             weatherDao.checkIfUpToDate();
     }
 
