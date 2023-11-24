@@ -2,12 +2,15 @@ package io.github.skippertokozak.lab04.client;
 
 import io.github.skippertokozak.lab04.client.dao.WeatherDao;
 
-import java.io.IOException;
-
-public class Main {
-    public static void main(String[] args){
+public class ClientRun {
+    private WeatherDao weatherDao;
+    public void run(){
 
         WeatherDao weatherDao = new WeatherDao();
             weatherDao.checkIfUpToDate();
+    }
+
+    public WeatherDao getWeatherDao() {
+        return weatherDao;
     }
 }

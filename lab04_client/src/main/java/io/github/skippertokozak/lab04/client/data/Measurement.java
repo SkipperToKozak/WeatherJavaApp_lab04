@@ -9,6 +9,9 @@ public class Measurement {
     public String getData_pomiaru() {
         return data_pomiaru;
     }
+    public Measurement() {
+        // No-args constructor
+    }
 
     public Measurement(Integer id_stacji, String stacja,
                        String data_pomiaru, Integer godzina_pomiaru,
