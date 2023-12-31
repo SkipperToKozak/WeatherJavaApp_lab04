@@ -7,6 +7,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -39,6 +40,12 @@ public class TemperaturePlot {
                 true,
                 false
         );
+
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        ValueMarker marker = new ValueMarker(0);
+        marker.setPaint(java.awt.Color.BLACK); // Możesz dostosować kolor
+        marker.setStroke(new BasicStroke(2)); // Pogrubiona linia
+        plot.addRangeMarker(marker);
 
     }
 

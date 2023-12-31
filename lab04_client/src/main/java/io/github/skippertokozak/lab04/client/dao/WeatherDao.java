@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class WeatherDao implements Dao<Measurement> {
-    private String pathS = "./database/weather_data.txt";
+    private String pathS = "./weather_data.txt";
     String apiURL = "https://danepubliczne.imgw.pl/api/data/synop";
     private Measurement[] downloadedData;
     private List<Measurement> localData = new ArrayList<>();

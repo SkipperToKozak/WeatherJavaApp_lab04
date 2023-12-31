@@ -10,7 +10,5 @@ public class Main {
         clientRun.run();
         WindowManager windowManager = new WindowManager(clientRun);
 
-
-        System.out.println("Hello world!");
     }
 }

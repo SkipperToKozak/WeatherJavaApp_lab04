@@ -3,6 +3,8 @@ package io.github.skippertokozak.lab04.gui.plots;
 import io.github.skippertokozak.lab04.client.data.Measurement;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -24,6 +26,11 @@ public class PressurePlot {
                 true,
                 false
         );
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+
+        // Ustaw skalę początkową na 900
+        rangeAxis.setRange(900.0, rangeAxis.getUpperBound());
 
     }
 
@@ -32,8 +39,9 @@ public class PressurePlot {
 
         for (Measurement m : list
         ) {
-
-            dataset.addValue(m.getCisnienie(),"Ciśnienie", m.getData_pomiaru());
+            if(m.getCisnienie()!= null) {
+                dataset.addValue(m.getCisnienie(), "Ciśnienie", m.getData_pomiaru());
+            }
         }
 
 

@@ -22,7 +22,9 @@ public class PanelMenu extends JPanel {
     private List<Measurement> allStationsDataList;
     private Integer id;
     private String stationName;
+    private JTable tablePanel;
     private ChartPanel chartPanel;
+    private JLabel errLbl;
     private static final long serialVersionUID = 1L;
 
     /**
@@ -70,8 +72,15 @@ public class PanelMenu extends JPanel {
         temperatureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 creatingStationData(clientRun, id);
-                centerPanel.remove(chartPanel);
-                chartPanel = newTemperatureChart();
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    chartPanel = newTemperatureChart();
+            }
+                catch (Exception er){
+                errLbl.setText("Dane wykresu są nieprawidłowe");
+
+            }
                 centerPanel.add(chartPanel);
                 scrollPane.revalidate();
             }
@@ -87,9 +96,17 @@ public class PanelMenu extends JPanel {
 
         windSpeedBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                centerPanel.remove(chartPanel);
-                chartPanel = newWindSpeed();
-                centerPanel.add(chartPanel);
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    tablePanel = newWindSpeed();
+            }
+                catch (Exception er){
+                errLbl.setText("Dane wykresu są nieprawidłowe");
+
+            }
+
+                centerPanel.add(tablePanel);
                 scrollPane.revalidate();
             }
         });
@@ -104,8 +121,15 @@ public class PanelMenu extends JPanel {
 
         windDirectionBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                centerPanel.remove(chartPanel);
-                chartPanel = newWindDirection();
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    chartPanel = newWindDirection();
+            }
+                catch (Exception er){
+                errLbl.setText("Dane wykresu są nieprawidłowe");
+
+            }
                 centerPanel.add(chartPanel);
                 scrollPane.revalidate();
             }
@@ -119,8 +143,15 @@ public class PanelMenu extends JPanel {
         westPanel.add(humidityBtn, gbc_humidityBtn);
         humidityBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                centerPanel.remove(chartPanel);
-                chartPanel = newHumidity();
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    chartPanel = newHumidity();
+            }
+                catch (Exception er){
+                errLbl.setText("Dane wykresu są nieprawidłowe");
+
+            }
                 centerPanel.add(chartPanel);
                 scrollPane.revalidate();
             }
@@ -136,8 +167,15 @@ public class PanelMenu extends JPanel {
 
         precipitationBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                centerPanel.remove(chartPanel);
-                chartPanel = newPrecipitation();
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    chartPanel = newPrecipitation();
+            }
+                catch (Exception er){
+                errLbl.setText("Dane wykresu są nieprawidłowe");
+
+            }
                 centerPanel.add(chartPanel);
                 scrollPane.revalidate();
             }
@@ -154,20 +192,27 @@ public class PanelMenu extends JPanel {
 
         pressureBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                centerPanel.remove(chartPanel);
-                chartPanel = newPressure();
+                centerPanel.removeAll();
+                try {
+                    errLbl.setText("");
+                    chartPanel = newPressure();
+                }
+                catch (Exception er){
+                    errLbl.setText("Dane wykresu są nieprawidłowe");
+
+                }
                 centerPanel.add(chartPanel);
                 scrollPane.revalidate();
             }
         });
 
+        JPanel southPanel = new JPanel();
+        add(southPanel, BorderLayout.SOUTH);
 
-        JLabel errorLabel = new JLabel("errorLabel");
+        JLabel errorLabel = new JLabel("");
         errorLabel.setForeground(new Color(255, 0, 0));
-        GridBagConstraints gbc_errorLabel = new GridBagConstraints();
-        gbc_errorLabel.gridx = 0;
-        gbc_errorLabel.gridy = 9;
-        westPanel.add(errorLabel, gbc_errorLabel);
+        southPanel.add(errorLabel);
+        errLbl = errorLabel;
 
         JPanel eastPanel = new JPanel();
         add(eastPanel, BorderLayout.EAST);
@@ -182,7 +227,7 @@ public class PanelMenu extends JPanel {
         JComboBox comboBox = new JComboBox();
         DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
         comboBoxModel.addElement(allStationsDataList.get(0).getStacja());
-        for (int i = 1; !allStationsDataList.get(0).getId_stacji().equals(allStationsDataList.get(i).getId_stacji());i++){
+        for (int i = 1; (i<allStationsDataList.size()) && (!allStationsDataList.get(0).getId_stacji().equals(allStationsDataList.get(i).getId_stacji()));i++){
             comboBoxModel.addElement(allStationsDataList.get(i).getStacja());
         }
         comboBox.setModel(comboBoxModel);
@@ -203,7 +248,7 @@ public class PanelMenu extends JPanel {
                     stationName = allStationsDataList.get(selectedIndex).getStacja();
                     creatingStationData(clientRun, id);
                     centerPanel.remove(chartPanel);
-                    chartPanel = newPressure();
+                    chartPanel = newTemperatureChart();
                     centerPanel.add(chartPanel);
                     stationNameLabel.setText(id+" - "+stationName);
 
@@ -219,8 +264,6 @@ public class PanelMenu extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-        JPanel southPanel = new JPanel();
-        add(southPanel, BorderLayout.SOUTH);
 
         JPanel northPanel = new JPanel();
         northPanel.setBorder(new MatteBorder(0, 0, 1, 0, new Color(0, 0, 0)));
@@ -247,11 +290,11 @@ public class PanelMenu extends JPanel {
         chartPanel.setPreferredSize(new Dimension(200, 300));
         return chartPanel;
     }
-    private ChartPanel newWindSpeed(){
-        WindSpeedPlot windSpeedPlot = new WindSpeedPlot(stationDataList);
-        ChartPanel chartPanel = new ChartPanel(windSpeedPlot.getChart());
-        chartPanel.setPreferredSize(new Dimension(200, 300));
-        return chartPanel;
+    private JTable newWindSpeed(){
+        WindTable windTable = new WindTable(stationDataList);
+        JTable jTable = windTable.getTable();
+        jTable.setPreferredSize(new Dimension(200,300));
+        return jTable;
     }
     private ChartPanel newWindDirection(){
         WindDirectionPlot windDirectionPlot = new WindDirectionPlot(stationDataList);
