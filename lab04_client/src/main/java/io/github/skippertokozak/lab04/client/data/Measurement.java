@@ -4,17 +4,18 @@ package io.github.skippertokozak.lab04.client.data;
 public class Measurement {
     private Integer id_stacji, godzina_pomiaru, predkosc_wiatru, kierunek_wiatru;
     private String stacja, data_pomiaru;
-    private Float temperatura, wilgotnosc_wzgledna, suma_opadu, cisnienie;
+    private Double temperatura, wilgotnosc_wzgledna, suma_opadu, cisnienie;
 
-    public String getData_pomiaru() {
-        return data_pomiaru;
+
+    public Measurement() {
+        // No-args constructor
     }
 
     public Measurement(Integer id_stacji, String stacja,
                        String data_pomiaru, Integer godzina_pomiaru,
-                       Float temperatura, Integer predkosc_wiatru,
-                       Integer kierunek_wiatru, Float wilgotnosc_wzgledna,
-                       Float suma_opadu, Float cisnienie) {
+                       Double temperatura, Integer predkosc_wiatru,
+                       Integer kierunek_wiatru, Double wilgotnosc_wzgledna,
+                       Double suma_opadu, Double cisnienie) {
 
         this.id_stacji = id_stacji;
         this.stacja = stacja;
@@ -43,5 +44,39 @@ public class Measurement {
                 ", cisnienie=" + cisnienie +
                 '}';
     }
+    public String getData_pomiaru() {
+        return data_pomiaru;
+    }
 
+    public Integer getId_stacji() {
+        return id_stacji;
+    }
+
+    public Integer getPredkosc_wiatru() {
+        return predkosc_wiatru;
+    }
+
+    public Integer getKierunek_wiatru() {
+        return kierunek_wiatru;
+    }
+
+    public String getStacja() {
+        return stacja;
+    }
+
+    public Double getTemperatura() {
+        return temperatura;
+    }
+
+    public Double getWilgotnosc_wzgledna() {
+        return wilgotnosc_wzgledna;
+    }
+
+    public Double getSuma_opadu() {
+        return suma_opadu;
+    }
+
+    public Double getCisnienie() {
+        return cisnienie;
+    }
 }
